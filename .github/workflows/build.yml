@@ -1,32 +1,33 @@
-name: Build and Publish Docker Image
+name: Build Docker
 
 on:
   push:
-    branches:
-      - main
+  pull_request:
 
 permissions:
   contents: read
   packages: write
 
 jobs:
-  docker:
+  build:
+
     runs-on: ubuntu-latest
 
     steps:
+
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Login a GHCR
+      - name: Login GHCR
         uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build y Push
+      - name: Build and Push
         uses: docker/build-push-action@v6
         with:
           context: .
           push: true
-          tags: ghcr.io/yajanuha597/tienda-colaborativa:latest
+          tags: ghcr.io/jessicacunalata29/tienda-colaborativa:latest
