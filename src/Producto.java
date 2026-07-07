@@ -12,4 +12,8 @@ public class Producto {
         System.out.println("Producto: " + nombre);
         System.out.println("Precio: $" + precio);
     }
+
+    public void aplicarDescuento(double porcentaje) {
+        precio = precio - (precio * porcentaje / 100);
+    }
 }
