@@ -1,0 +1,31 @@
+name: Java Build
+
+on:
+  push:
+    branches:
+      - main
+      - feature-*
+
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clonar repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Compilar proyecto
+        run: javac src/*.java
+
+      - name: Finalizado
+        run: echo "✔ Proyecto compilado correctamente"
