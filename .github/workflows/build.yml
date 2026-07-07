@@ -4,6 +4,11 @@ on:
   push:
     branches:
       - main
+      - feature-jessica
+
+  pull_request:
+    branches:
+      - main
 
 permissions:
   contents: read
@@ -17,16 +22,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Login a GHCR
+      - name: Login GHCR
         uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build y Push
+      - name: Build and Push
         uses: docker/build-push-action@v6
         with:
           context: .
           push: true
-          tags: ghcr.io/yajanuha597/tienda-colaborativa:latest
+          tags: ghcr.io/jessicacunalata29/tienda-colaborativa:latest
